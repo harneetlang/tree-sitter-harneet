@@ -1,0 +1,39 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "harneet",
+      "camelcase": "Harneet",
+      "title": "Harneet",
+      "scope": "source.harneet",
+      "file-types": [
+        "ha"
+      ],
+      "injection-regex": "^harneet$",
+      "class-name": "TreeSitterHarneet"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Harneet is a  GO inspired programming language",
+    "authors": [
+      {
+        "name": "Gagan Janjua",
+        "email": "gj1118@gmail.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tree-sitter/tree-sitter-harneet"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

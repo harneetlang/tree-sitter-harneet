@@ -1,0 +1,22 @@
+{
+  "name": "tree-sitter-harneet",
+  "version": "0.1.0",
+  "description": "Tree-sitter grammar for the Harneet programming language",
+  "author": "Harneet Language",
+  "license": "MIT",
+  "main": "./bindings/node/index.js",
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.6"
+  },
+  "keywords": [
+    "tree-sitter",
+    "harneet",
+    "grammar",
+    "parser"
+  ]
+}
