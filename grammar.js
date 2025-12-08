@@ -222,7 +222,7 @@ module.exports = grammar({
       'string', 'bool', 'rune', 'error', 'any'
     ),
     
-    array_type: $ => prec.left(seq($._type, '[', ']')),
+    array_type: $ => prec.left(seq('[', ']', $._type)),
     
     map_type: $ => prec.right(seq('map', '[', $._type, ']', $._type)),
     

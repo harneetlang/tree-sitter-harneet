@@ -48,3 +48,6 @@ zig-out/
 *.tar.gz
 *.tgz
 *.zip
+
+# Deploy script config
+.helix_path
