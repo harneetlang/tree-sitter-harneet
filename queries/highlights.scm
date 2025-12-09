@@ -90,13 +90,30 @@
 
 ;; Functions
 (function_declaration name: (identifier) @function)
-(call_expression function: (expression (identifier) @function))
+
+;; Simple function calls: foo(...)
+(call_expression
+  function: (expression
+    (identifier) @function.builtin))
+
+;; Method calls: module.Func(...)
+(call_expression
+  function: (expression
+    (member_expression
+      object: (expression
+        (identifier) @namespace)
+      property: (identifier) @function.method)))
+
+;; General member access: module.property (fallback for non-call contexts)
+(member_expression
+  object: (expression
+    (identifier) @namespace)
+  property: (identifier) @variable.other.member)
 
 ;; Variables
 (variable_declaration name: (identifier) @variable)
 (const_declaration name: (identifier) @constant)
 (parameter name: (identifier) @variable.parameter)
-(identifier) @variable
 
 ;; Error
 (ERROR) @error
