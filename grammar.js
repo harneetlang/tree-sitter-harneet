@@ -264,6 +264,7 @@ module.exports = grammar({
       $._primary_expression,
       $.unary_expression,
       $.binary_expression,
+      $.pipe_expression,
       $.call_expression,
       $.member_expression,
       $.index_expression,
@@ -271,6 +272,13 @@ module.exports = grammar({
       $.arrow_function,
       $.anonymous_function,
     ),
+    
+    // Pipe expression as a completely separate rule
+    pipe_expression: $ => prec.left(seq(
+      $.expression,
+      '|>',
+      $.expression
+    )),
     
     _primary_expression: $ => choice(
       $.literal,

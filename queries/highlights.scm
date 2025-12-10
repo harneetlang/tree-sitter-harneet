@@ -69,6 +69,7 @@
   ">="
   "!"
   "=>"
+  "|>"
 ] @operator
 
 ;; Punctuation
