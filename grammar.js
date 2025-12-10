@@ -212,6 +212,7 @@ module.exports = grammar({
       $.array_type,
       $.map_type,
       $.function_type,
+      $.tuple_type,
       $.identifier,
     ),
     
@@ -231,6 +232,19 @@ module.exports = grammar({
       '(', optional(seq($._type, repeat(seq(',', $._type)))), ')',
       optional($._type)
     )),
+    
+    // Tuple type: (int, string, bool) or () or (int,)
+    tuple_type: $ => seq(
+      '(',
+      optional(seq(
+        $._type,
+        choice(
+          seq(repeat1(seq(',', $._type)), optional(',')),  // Multi-element: (int, string) or (int, string,)
+          ','  // Single-element: (int,)
+        )
+      )),
+      ')'
+    ),
     
     struct_type: $ => seq(
       'struct',
@@ -285,6 +299,7 @@ module.exports = grammar({
       $.identifier,
       $.blank_identifier,
       $.parenthesized_expression,
+      $.tuple_literal,
       $.array_literal,
       $.map_literal,
       $.struct_literal,
@@ -295,6 +310,19 @@ module.exports = grammar({
     none: _ => 'None',
 
     parenthesized_expression: $ => seq('(', $.expression, ')'),
+    
+    // Tuple literal: (1, 2, 3) or () or (5,)
+    tuple_literal: $ => prec(1, seq(
+      '(',
+      optional(seq(
+        $.expression,
+        choice(
+          seq(repeat1(seq(',', $.expression)), optional(',')),  // Multi-element: (1, 2) or (1, 2,)
+          ','  // Single-element: (5,)
+        )
+      )),
+      ')'
+    )),
     
     unary_expression: $ => prec.left(7, seq(
       field('operator', choice('-', 'not', '!')),
