@@ -285,7 +285,14 @@ module.exports = grammar({
       $.match_expression,
       $.arrow_function,
       $.anonymous_function,
+      $.do_expression,
     ),
+    
+    // do expression for async task spawning
+    do_expression: $ => prec.right(seq(
+      'do',
+      field('task', $.expression)
+    )),
     
     // Pipe expression as a completely separate rule
     pipe_expression: $ => prec.left(seq(

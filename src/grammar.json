@@ -1772,8 +1772,33 @@
         {
           "type": "SYMBOL",
           "name": "anonymous_function"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "do_expression"
         }
       ]
+    },
+    "do_expression": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "do"
+          },
+          {
+            "type": "FIELD",
+            "name": "task",
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          }
+        ]
+      }
     },
     "pipe_expression": {
       "type": "PREC_LEFT",

@@ -472,6 +472,22 @@
     }
   },
   {
+    "type": "do_expression",
+    "named": true,
+    "fields": {
+      "task": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "enum_declaration",
     "named": true,
     "fields": {
@@ -553,6 +569,10 @@
         },
         {
           "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "do_expression",
           "named": true
         },
         {
@@ -1940,6 +1960,10 @@
     "named": false
   },
   {
+    "type": "do",
+    "named": false
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -2053,11 +2077,11 @@
   },
   {
     "type": "rune",
-    "named": false
+    "named": true
   },
   {
     "type": "rune",
-    "named": true
+    "named": false
   },
   {
     "type": "string",

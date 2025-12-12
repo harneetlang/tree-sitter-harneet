@@ -20,6 +20,7 @@
   "import"
   "as"
   "go"
+  "do"
   "package"
   "struct"
   "interface"
