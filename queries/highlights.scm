@@ -28,6 +28,7 @@
   "and"
   "or"
   "not"
+  "receive"
 ] @keyword
 
 ;; Statements (for break/continue which are anonymous)

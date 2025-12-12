@@ -1112,6 +1112,10 @@
         "required": true,
         "types": [
           {
+            "type": "block",
+            "named": true
+          },
+          {
             "type": "expression",
             "named": true
           }
@@ -1145,7 +1149,7 @@
     "fields": {
       "value": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "expression",
@@ -1306,6 +1310,10 @@
         {
           "type": "literal",
           "named": true
+        },
+        {
+          "type": "receive_pattern",
+          "named": true
         }
       ]
     }
@@ -1323,6 +1331,36 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "receive_pattern",
+    "named": true,
+    "fields": {
+      "binding": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "blank_identifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "channel": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2069,6 +2107,10 @@
   },
   {
     "type": "package",
+    "named": false
+  },
+  {
+    "type": "receive",
     "named": false
   },
   {

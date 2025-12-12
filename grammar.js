@@ -12,6 +12,11 @@ module.exports = grammar({
 
   word: $ => $.identifier,
 
+  conflicts: $ => [
+    [$.pattern, $._primary_expression],
+    [$.array_pattern, $.array_literal],
+  ],
+
   rules: {
     source_file: $ => repeat($._statement),
 
@@ -390,19 +395,20 @@ module.exports = grammar({
     ),
     
     // Match expression (pattern matching)
-    match_expression: $ => seq(
+    // Supports both: match value { ... } and match { ... } (channel select)
+    match_expression: $ => prec(2, seq(
       'match',
-      field('value', $.expression),
+      optional(field('value', $.expression)),
       '{',
       repeat($.match_arm),
       '}'
-    ),
+    )),
     
     match_arm: $ => seq(
       field('pattern', $.pattern),
       optional(seq('if', field('guard', $.expression))),
       '=>',
-      field('body', $.expression),
+      field('body', choice($.expression, $.block)),
       optional(',')
     ),
     
@@ -411,6 +417,17 @@ module.exports = grammar({
       $.identifier,
       $.blank_identifier,
       $.array_pattern,
+      $.receive_pattern,
+    ),
+    
+    // Receive pattern for channel select: receive(ch) as val
+    receive_pattern: $ => seq(
+      'receive',
+      '(',
+      field('channel', $.expression),
+      ')',
+      'as',
+      field('binding', choice($.identifier, $.blank_identifier))
     ),
     
     array_pattern: $ => seq('[', optional(seq($.pattern, repeat(seq(',', $.pattern)))), ']'),
