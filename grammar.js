@@ -425,7 +425,7 @@ module.exports = grammar({
     receive_pattern: $ => seq(
       'receive',
       '(',
-      field('channel', $.expression),
+      field('channel', $._simple_expression),
       ')',
       'as',
       field('binding', choice($.identifier, $.blank_identifier))
@@ -435,12 +435,20 @@ module.exports = grammar({
     send_pattern: $ => seq(
       'send',
       '(',
-      field('channel', $.expression),
+      field('channel', $._simple_expression),
       ',',
-      field('value', $.expression),
+      field('value', $._simple_expression),
       ')',
       'as',
       field('binding', choice($.identifier, $.blank_identifier))
+    ),
+    
+    // Simple expression for use in patterns (avoids recursion with match_expression)
+    _simple_expression: $ => choice(
+      $._primary_expression,
+      $.call_expression,
+      $.member_expression,
+      $.index_expression,
     ),
     
     array_pattern: $ => seq('[', optional(seq($.pattern, repeat(seq(',', $.pattern)))), ']'),
