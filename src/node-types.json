@@ -1314,6 +1314,10 @@
         {
           "type": "receive_pattern",
           "named": true
+        },
+        {
+          "type": "send_pattern",
+          "named": true
         }
       ]
     }
@@ -1376,6 +1380,46 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "send_pattern",
+    "named": true,
+    "fields": {
+      "binding": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "blank_identifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "channel": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2119,10 +2163,14 @@
   },
   {
     "type": "rune",
-    "named": true
+    "named": false
   },
   {
     "type": "rune",
+    "named": true
+  },
+  {
+    "type": "send",
     "named": false
   },
   {

@@ -29,6 +29,7 @@
   "or"
   "not"
   "receive"
+  "send"
 ] @keyword
 
 ;; Statements (for break/continue which are anonymous)

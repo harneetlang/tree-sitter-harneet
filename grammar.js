@@ -418,6 +418,7 @@ module.exports = grammar({
       $.blank_identifier,
       $.array_pattern,
       $.receive_pattern,
+      $.send_pattern,
     ),
     
     // Receive pattern for channel select: receive(ch) as val
@@ -425,6 +426,18 @@ module.exports = grammar({
       'receive',
       '(',
       field('channel', $.expression),
+      ')',
+      'as',
+      field('binding', choice($.identifier, $.blank_identifier))
+    ),
+    
+    // Send pattern for channel select: send(ch, val) as ok
+    send_pattern: $ => seq(
+      'send',
+      '(',
+      field('channel', $.expression),
+      ',',
+      field('value', $.expression),
       ')',
       'as',
       field('binding', choice($.identifier, $.blank_identifier))
