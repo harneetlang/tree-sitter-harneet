@@ -160,6 +160,40 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_type",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
           }
         ]
       }
@@ -638,19 +672,9 @@
     }
   },
   {
-    "type": "for_in_statement",
+    "type": "for_in_clause",
     "named": true,
     "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block",
-            "named": true
-          }
-        ]
-      },
       "left": {
         "multiple": false,
         "required": true,
@@ -676,11 +700,73 @@
         "required": true,
         "types": [
           {
-            "type": "expression",
+            "type": "array_literal",
+            "named": true
+          },
+          {
+            "type": "blank_identifier",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_expression",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "map_literal",
+            "named": true
+          },
+          {
+            "type": "member_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "tuple_literal",
             "named": true
           }
         ]
       }
+    }
+  },
+  {
+    "type": "for_in_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "for_in_clause",
+          "named": true
+        }
+      ]
     }
   },
   {

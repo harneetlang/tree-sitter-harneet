@@ -15,6 +15,8 @@ module.exports = grammar({
   conflicts: $ => [
     [$.pattern, $._primary_expression],
     [$.array_pattern, $.array_literal],
+    [$.parameter, $._primary_expression],
+    [$.for_in_clause, $.expression],
   ],
 
   rules: {
@@ -68,8 +70,8 @@ module.exports = grammar({
       $.return_statement,
       $.defer_statement,
       $.if_statement,
+      $.for_in_statement,  // Must come before for_statement
       $.for_statement,
-      $.for_in_statement,
       $.switch_statement,
       $.break_statement,
       $.continue_statement,
@@ -165,20 +167,31 @@ module.exports = grammar({
       optional(seq('else', field('alternative', choice($.if_statement, $.block))))
     )),
 
-    for_statement: $ => seq(
+    // For-in statement: for x in collection { } or for k, v in collection { }
+    // Use token.immediate to ensure 'in' is recognized as keyword, not part of expression
+    for_in_statement: $ => seq(
       'for',
-      optional(field('condition', $.expression)),
+      $.for_in_clause,
       field('body', $.block)
     ),
     
-    for_in_statement: $ => seq(
-      'for',
+    // Separate rule for the "x in collection" part to avoid ambiguity
+    for_in_clause: $ => seq(
       field('left', $.identifier),
       optional(seq(',', field('left2', $.identifier))),
       'in',
-      field('right', $.expression),
+      field('right', $._non_struct_expression),
+    ),
+    
+    // For statement: for { } or for condition { }
+    for_statement: $ => seq(
+      'for',
+      optional(field('condition', $._for_condition)),
       field('body', $.block)
     ),
+    
+    // For condition - excludes patterns that look like for-in
+    _for_condition: $ => $.expression,
     
     switch_statement: $ => prec(3, seq(
       'switch',
@@ -239,13 +252,19 @@ module.exports = grammar({
     )),
     
     // Tuple type: (int, string, bool) or () or (int,)
+    // Also handles parenthesized single type: (int) for return type annotations
     tuple_type: $ => seq(
       '(',
-      optional(seq(
+      optional(choice(
+        // Single type without comma: (int) - used for return type annotations
         $._type,
-        choice(
-          seq(repeat1(seq(',', $._type)), optional(',')),  // Multi-element: (int, string) or (int, string,)
-          ','  // Single-element: (int,)
+        // Multi-element or single with trailing comma
+        seq(
+          $._type,
+          choice(
+            seq(repeat1(seq(',', $._type)), optional(',')),  // Multi-element: (int, string) or (int, string,)
+            ','  // Single-element tuple: (int,)
+          )
         )
       )),
       ')'
@@ -378,7 +397,9 @@ module.exports = grammar({
     map_literal: $ => seq('{', optional(seq($.map_entry, repeat(seq(',', $.map_entry)), optional(','))), '}'),
     map_entry: $ => seq(field('key', $.expression), ':', field('value', $.expression)),
     
-    struct_literal: $ => prec(1, seq(
+    // Struct literal: Type{field: value} or Type{val1, val2}
+    // Use negative precedence to prefer block interpretation in ambiguous contexts
+    struct_literal: $ => prec(-1, seq(
       field('type', $.identifier),
       '{',
       optional(choice(
@@ -451,13 +472,41 @@ module.exports = grammar({
       $.index_expression,
     ),
     
+    // Expression that cannot be a struct literal (for use in for-in to avoid ambiguity with block)
+    _non_struct_expression: $ => choice(
+      $.literal,
+      $.identifier,
+      $.blank_identifier,
+      $.parenthesized_expression,
+      $.tuple_literal,
+      $.array_literal,
+      $.map_literal,
+      $.call_expression,
+      $.member_expression,
+      $.index_expression,
+    ),
+    
     array_pattern: $ => seq('[', optional(seq($.pattern, repeat(seq(',', $.pattern)))), ']'),
     
-    // Arrow functions - use GLR parsing with explicit conflict
-    arrow_function: $ => prec.right(1, seq(
-      field('parameters', $.identifier),
-      '=>',
-      field('body', choice($.expression, $.block))
+    // Arrow functions - supports multiple forms:
+    // 1. Simple: x => x + 1
+    // 2. Typed params: (x int) => x + 1
+    // 3. Typed params with return: (x int) (int) => x + 1
+    // 4. Multiple params: (x int, y int) (int) => x + y
+    arrow_function: $ => prec.right(1, choice(
+      // Simple form: identifier => body
+      seq(
+        field('parameters', $.identifier),
+        '=>',
+        field('body', choice($.expression, $.block))
+      ),
+      // Typed form: (params) [return_type] => body
+      seq(
+        field('parameters', $.parameter_list),
+        optional(field('return_type', choice($.tuple_type, $._type))),
+        '=>',
+        field('body', choice($.expression, $.block))
+      ),
     )),
     
     // Anonymous functions
