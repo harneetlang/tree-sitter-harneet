@@ -231,7 +231,15 @@ module.exports = grammar({
       $.map_type,
       $.function_type,
       $.tuple_type,
+      $.qualified_type,
       $.identifier,
+    ),
+    
+    // Qualified type for module-prefixed types like db.Connection, http.Request
+    qualified_type: $ => seq(
+      field('module', $.identifier),
+      '.',
+      field('name', $.identifier)
     ),
     
     simple_type: _ => choice(

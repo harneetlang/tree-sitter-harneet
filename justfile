@@ -6,4 +6,10 @@ generate:
 
 validate:
     tree-sitter parse samples/example.ha
-    
+
+
+wasm:
+    tree-sitter build-wasm
+
+deploy:
+    python3 deploy_to_helix.py

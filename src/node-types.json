@@ -44,6 +44,10 @@
             "named": true
           },
           {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
             "type": "simple_type",
             "named": true
           },
@@ -125,6 +129,10 @@
           "named": true
         },
         {
+          "type": "qualified_type",
+          "named": true
+        },
+        {
           "type": "simple_type",
           "named": true
         },
@@ -185,6 +193,10 @@
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
             "named": true
           },
           {
@@ -451,6 +463,10 @@
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
             "named": true
           },
           {
@@ -850,6 +866,10 @@
             "named": true
           },
           {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
             "type": "simple_type",
             "named": true
           },
@@ -883,6 +903,10 @@
         },
         {
           "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "qualified_type",
           "named": true
         },
         {
@@ -1052,6 +1076,10 @@
             "named": true
           },
           {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
             "type": "simple_type",
             "named": true
           },
@@ -1176,6 +1204,10 @@
         },
         {
           "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "qualified_type",
           "named": true
         },
         {
@@ -1332,6 +1364,10 @@
             "named": true
           },
           {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
             "type": "simple_type",
             "named": true
           },
@@ -1421,6 +1457,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "qualified_type",
+    "named": true,
+    "fields": {
+      "module": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1752,6 +1814,10 @@
             "named": true
           },
           {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
             "type": "simple_type",
             "named": true
           },
@@ -1904,6 +1970,10 @@
           "named": true
         },
         {
+          "type": "qualified_type",
+          "named": true
+        },
+        {
           "type": "simple_type",
           "named": true
         },
@@ -1951,6 +2021,10 @@
         },
         {
           "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "qualified_type",
           "named": true
         },
         {
@@ -2034,6 +2108,10 @@
           },
           {
             "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
             "named": true
           },
           {
@@ -2381,11 +2459,11 @@
   },
   {
     "type": "string",
-    "named": false
+    "named": true
   },
   {
     "type": "string",
-    "named": true
+    "named": false
   },
   {
     "type": "struct",
