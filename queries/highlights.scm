@@ -116,6 +116,8 @@
 
 ;; Variables
 (variable_declaration name: (identifier) @variable)
+(typed_var_spec name: (identifier) @variable)
+(typed_var_spec type: (_) @type)
 (const_declaration name: (identifier) @constant)
 (parameter name: (identifier) @variable.parameter)
 

@@ -17,6 +17,7 @@ module.exports = grammar({
     [$.array_pattern, $.array_literal],
     [$.parameter, $._primary_expression],
     [$.for_in_clause, $.expression],
+    [$.variable_declaration, $.typed_var_spec],
   ],
 
   rules: {
@@ -96,10 +97,27 @@ module.exports = grammar({
 
     variable_declaration: $ => prec.right(seq(
       'var',
-      field('name', $.identifier),
-      optional(field('type', $._type)),
-      optional(seq('=', field('value', $.expression)))
+      choice(
+        // Multiple typed variables: var x int, y string = expr
+        seq(
+          $.typed_var_spec,
+          repeat(seq(',', $.typed_var_spec)),
+          optional(seq('=', field('value', $.expression)))
+        ),
+        // Single variable: var x = expr or var x type = expr
+        seq(
+          field('name', $.identifier),
+          optional(field('type', $._type)),
+          optional(seq('=', field('value', $.expression)))
+        )
+      )
     )),
+    
+    // Helper for typed variable in multi-var declarations
+    typed_var_spec: $ => seq(
+      field('name', $.identifier),
+      field('type', $._type)
+    ),
     
     const_declaration: $ => seq(
       'const',
