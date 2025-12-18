@@ -46,7 +46,7 @@ module.exports = grammar({
     
     string: _ => token(choice(
       seq('"', repeat(choice(/[^"\\\n]/, /\\./)), '"'),
-      seq('`', repeat(choice(/[^`\\]/, /\\./)), '`'),  // Raw strings
+      seq('`', /[^`]*/,  '`'),  // Raw/multiline strings - allow any char except backtick
     )),
     
     rune: _ => token(seq("'", choice(/[^'\\]/, /\\./), "'")),
