@@ -75,21 +75,6 @@
     }
   },
   {
-    "type": "array_literal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "array_pattern",
     "named": true,
     "fields": {},
@@ -109,7 +94,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -126,6 +111,10 @@
         },
         {
           "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "number",
           "named": true
         },
         {
@@ -602,10 +591,6 @@
           "named": true
         },
         {
-          "type": "array_literal",
-          "named": true
-        },
-        {
           "type": "arrow_function",
           "named": true
         },
@@ -638,10 +623,6 @@
           "named": true
         },
         {
-          "type": "map_literal",
-          "named": true
-        },
-        {
           "type": "match_expression",
           "named": true
         },
@@ -663,6 +644,18 @@
         },
         {
           "type": "tuple_literal",
+          "named": true
+        },
+        {
+          "type": "typed_array_literal",
+          "named": true
+        },
+        {
+          "type": "typed_map_literal",
+          "named": true
+        },
+        {
+          "type": "typed_slice_literal",
           "named": true
         },
         {
@@ -716,10 +709,6 @@
         "required": true,
         "types": [
           {
-            "type": "array_literal",
-            "named": true
-          },
-          {
             "type": "blank_identifier",
             "named": true
           },
@@ -740,10 +729,6 @@
             "named": true
           },
           {
-            "type": "map_literal",
-            "named": true
-          },
-          {
             "type": "member_expression",
             "named": true
           },
@@ -753,6 +738,18 @@
           },
           {
             "type": "tuple_literal",
+            "named": true
+          },
+          {
+            "type": "typed_array_literal",
+            "named": true
+          },
+          {
+            "type": "typed_map_literal",
+            "named": true
+          },
+          {
+            "type": "typed_slice_literal",
             "named": true
           }
         ]
@@ -1168,21 +1165,6 @@
     }
   },
   {
-    "type": "map_literal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "map_entry",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "map_type",
     "named": true,
     "fields": {},
@@ -1307,6 +1289,60 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "multi_var_shared_type",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "blank_identifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_type",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
+            "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
             "named": true
           }
         ]
@@ -1508,10 +1544,6 @@
         "required": true,
         "types": [
           {
-            "type": "array_literal",
-            "named": true
-          },
-          {
             "type": "blank_identifier",
             "named": true
           },
@@ -1532,10 +1564,6 @@
             "named": true
           },
           {
-            "type": "map_literal",
-            "named": true
-          },
-          {
             "type": "member_expression",
             "named": true
           },
@@ -1549,6 +1577,18 @@
           },
           {
             "type": "tuple_literal",
+            "named": true
+          },
+          {
+            "type": "typed_array_literal",
+            "named": true
+          },
+          {
+            "type": "typed_map_literal",
+            "named": true
+          },
+          {
+            "type": "typed_slice_literal",
             "named": true
           }
         ]
@@ -1593,10 +1633,6 @@
         "required": true,
         "types": [
           {
-            "type": "array_literal",
-            "named": true
-          },
-          {
             "type": "blank_identifier",
             "named": true
           },
@@ -1617,10 +1653,6 @@
             "named": true
           },
           {
-            "type": "map_literal",
-            "named": true
-          },
-          {
             "type": "member_expression",
             "named": true
           },
@@ -1634,6 +1666,18 @@
           },
           {
             "type": "tuple_literal",
+            "named": true
+          },
+          {
+            "type": "typed_array_literal",
+            "named": true
+          },
+          {
+            "type": "typed_map_literal",
+            "named": true
+          },
+          {
+            "type": "typed_slice_literal",
             "named": true
           }
         ]
@@ -1643,10 +1687,6 @@
         "required": true,
         "types": [
           {
-            "type": "array_literal",
-            "named": true
-          },
-          {
             "type": "blank_identifier",
             "named": true
           },
@@ -1667,10 +1707,6 @@
             "named": true
           },
           {
-            "type": "map_literal",
-            "named": true
-          },
-          {
             "type": "member_expression",
             "named": true
           },
@@ -1684,6 +1720,18 @@
           },
           {
             "type": "tuple_literal",
+            "named": true
+          },
+          {
+            "type": "typed_array_literal",
+            "named": true
+          },
+          {
+            "type": "typed_map_literal",
+            "named": true
+          },
+          {
+            "type": "typed_slice_literal",
             "named": true
           }
         ]
@@ -2043,6 +2091,184 @@
     }
   },
   {
+    "type": "typed_array_literal",
+    "named": true,
+    "fields": {
+      "element_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
+            "type": "simple_type",
+            "named": true
+          }
+        ]
+      },
+      "size": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typed_map_literal",
+    "named": true,
+    "fields": {
+      "key_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_type",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
+            "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      },
+      "value_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_type",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
+            "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "map_entry",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typed_slice_literal",
+    "named": true,
+    "fields": {
+      "element_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_type",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
+            "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "typed_var_spec",
     "named": true,
     "fields": {
@@ -2050,6 +2276,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "blank_identifier",
+            "named": true
+          },
           {
             "type": "identifier",
             "named": true
@@ -2135,6 +2365,10 @@
         "required": false,
         "types": [
           {
+            "type": "blank_identifier",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           }
@@ -2189,6 +2423,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "multi_var_shared_type",
+          "named": true
+        },
         {
           "type": "typed_var_spec",
           "named": true
@@ -2390,6 +2628,10 @@
     "named": false
   },
   {
+    "type": "duration",
+    "named": false
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -2470,6 +2712,10 @@
     "named": false
   },
   {
+    "type": "location",
+    "named": false
+  },
+  {
     "type": "map",
     "named": false
   },
@@ -2519,11 +2765,11 @@
   },
   {
     "type": "string",
-    "named": true
+    "named": false
   },
   {
     "type": "string",
-    "named": false
+    "named": true
   },
   {
     "type": "struct",
@@ -2534,7 +2780,23 @@
     "named": false
   },
   {
+    "type": "ticker",
+    "named": false
+  },
+  {
+    "type": "time",
+    "named": false
+  },
+  {
+    "type": "timer",
+    "named": false
+  },
+  {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "tuple",
     "named": false
   },
   {

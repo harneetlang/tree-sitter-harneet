@@ -14,10 +14,10 @@ module.exports = grammar({
 
   conflicts: $ => [
     [$.pattern, $._primary_expression],
-    [$.array_pattern, $.array_literal],
     [$.parameter, $._primary_expression],
     [$.for_in_clause, $.expression],
     [$.variable_declaration, $.typed_var_spec],
+    [$.typed_slice_literal, $.typed_array_literal],
   ],
 
   rules: {
@@ -104,18 +104,30 @@ module.exports = grammar({
           repeat(seq(',', $.typed_var_spec)),
           optional(seq('=', field('value', $.expression)))
         ),
+        // Multiple variables with shared type: var _, w1 error = expr or var x, y int = expr
+        seq(
+          $.multi_var_shared_type,
+          optional(seq('=', field('value', $.expression)))
+        ),
         // Single variable: var x = expr or var x type = expr
         seq(
-          field('name', $.identifier),
+          field('name', choice($.identifier, $.blank_identifier)),
           optional(field('type', $._type)),
           optional(seq('=', field('value', $.expression)))
         )
       )
     )),
     
+    // Multiple variables sharing a single type: var x, y, z int
+    multi_var_shared_type: $ => seq(
+      field('name', choice($.identifier, $.blank_identifier)),
+      repeat1(seq(',', field('name', choice($.identifier, $.blank_identifier)))),
+      field('type', $._type)
+    ),
+    
     // Helper for typed variable in multi-var declarations
     typed_var_spec: $ => seq(
-      field('name', $.identifier),
+      field('name', choice($.identifier, $.blank_identifier)),
       field('type', $._type)
     ),
     
@@ -264,10 +276,14 @@ module.exports = grammar({
       'int', 'int8', 'int16', 'int32', 'int64',
       'uint', 'uint8', 'uint16', 'uint32', 'uint64', 'uintptr', 'byte',
       'float32', 'float64', 'decimal',
-      'string', 'bool', 'rune', 'error', 'any'
+      'string', 'bool', 'rune', 'error', 'any', 'tuple',
+      'time', 'duration', 'timer', 'ticker', 'location'
     ),
     
-    array_type: $ => prec.left(seq('[', ']', $._type)),
+    array_type: $ => prec.left(choice(
+      seq('[', ']', $._type),                    // Slice type: []T
+      seq('[', $.number, ']', $._type),          // Fixed-size array type: [N]T
+    )),
     
     map_type: $ => prec.right(seq('map', '[', $._type, ']', $._type)),
     
@@ -357,9 +373,10 @@ module.exports = grammar({
       $.blank_identifier,
       $.parenthesized_expression,
       $.tuple_literal,
-      $.array_literal,
-      $.map_literal,
+      $.typed_slice_literal,
+      $.typed_map_literal,
       $.struct_literal,
+      $.typed_array_literal,
     ),
 
     literal: $ => choice($.number, $.float, $.string, $.rune, $.boolean, $.none),
@@ -418,10 +435,42 @@ module.exports = grammar({
       ']'
     )),
 
-    array_literal: $ => seq('[', optional(seq($.expression, repeat(seq(',', $.expression)), optional(','))), ']'),
+    // Typed slice literal: []Type{elements} - Go-style slice literals
+    // Note: Bare array literals [1, 2, 3] are no longer allowed
+    typed_slice_literal: $ => seq(
+      '[', ']',
+      field('element_type', $._type),
+      '{',
+      optional(seq($.expression, repeat(seq(',', $.expression)), optional(','))),
+      '}'
+    ),
+    
+    // Typed array literal: [size]Type{elements} - fixed-size arrays (Go-style)
+    typed_array_literal: $ => seq(
+      '[',
+      field('size', $.expression),
+      ']',
+      field('element_type', choice($.simple_type, $.identifier, $.qualified_type)),
+      '{',
+      optional(seq($.expression, repeat(seq(',', $.expression)), optional(','))),
+      '}'
+    ),
 
-    map_literal: $ => seq('{', optional(seq($.map_entry, repeat(seq(',', $.map_entry)), optional(','))), '}'),
+    // Note: Bare map literals {"key": value} are no longer allowed
+    // Use typed map syntax: map[KeyType]ValueType{entries}
     map_entry: $ => seq(field('key', $.expression), ':', field('value', $.expression)),
+    
+    // Typed map literal: map[KeyType]ValueType{entries} - Go-style map literals
+    typed_map_literal: $ => seq(
+      'map',
+      '[',
+      field('key_type', $._type),
+      ']',
+      field('value_type', $._type),
+      '{',
+      optional(seq($.map_entry, repeat(seq(',', $.map_entry)), optional(','))),
+      '}'
+    ),
     
     // Struct literal: Type{field: value} or Type{val1, val2}
     // Use negative precedence to prefer block interpretation in ambiguous contexts
@@ -505,8 +554,9 @@ module.exports = grammar({
       $.blank_identifier,
       $.parenthesized_expression,
       $.tuple_literal,
-      $.array_literal,
-      $.map_literal,
+      $.typed_slice_literal,
+      $.typed_map_literal,
+      $.typed_array_literal,
       $.call_expression,
       $.member_expression,
       $.index_expression,

@@ -118,8 +118,22 @@
 (variable_declaration name: (identifier) @variable)
 (typed_var_spec name: (identifier) @variable)
 (typed_var_spec type: (_) @type)
+(multi_var_shared_type name: (identifier) @variable)
+(multi_var_shared_type type: (_) @type)
 (const_declaration name: (identifier) @constant)
 (parameter name: (identifier) @variable.parameter)
+
+;; Typed literals
+(typed_slice_literal element_type: (_) @type)
+(typed_map_literal key_type: (_) @type)
+(typed_map_literal value_type: (_) @type)
+(typed_array_literal element_type: (_) @type)
+
+;; User-defined types
+(type_declaration name: (identifier) @type)
+(struct_literal type: (identifier) @type)
+(interface_type) @type
+(struct_type) @type
 
 ;; Error
 (ERROR) @error
