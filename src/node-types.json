@@ -40,6 +40,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -49,6 +53,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -110,6 +118,10 @@
           "named": true
         },
         {
+          "type": "interface_type",
+          "named": true
+        },
+        {
           "type": "map_type",
           "named": true
         },
@@ -123,6 +135,10 @@
         },
         {
           "type": "simple_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
           "named": true
         },
         {
@@ -181,6 +197,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -190,6 +210,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -451,6 +475,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -460,6 +488,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -639,11 +671,19 @@
           "named": true
         },
         {
+          "type": "qualified_type",
+          "named": true
+        },
+        {
           "type": "struct_literal",
           "named": true
         },
         {
           "type": "tuple_literal",
+          "named": true
+        },
+        {
+          "type": "type_assertion",
           "named": true
         },
         {
@@ -681,6 +721,50 @@
     }
   },
   {
+    "type": "for_c_clause",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "init": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "assignment_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          }
+        ]
+      },
+      "update": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "assignment_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "for_in_clause",
     "named": true,
     "fields": {
@@ -688,6 +772,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "blank_identifier",
+            "named": true
+          },
           {
             "type": "identifier",
             "named": true
@@ -698,6 +786,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "blank_identifier",
+            "named": true
+          },
           {
             "type": "identifier",
             "named": true
@@ -806,6 +898,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "for_c_clause",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -859,6 +961,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -868,6 +974,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -899,6 +1009,10 @@
           "named": true
         },
         {
+          "type": "interface_type",
+          "named": true
+        },
+        {
           "type": "map_type",
           "named": true
         },
@@ -908,6 +1022,10 @@
         },
         {
           "type": "simple_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
           "named": true
         },
         {
@@ -1037,6 +1155,10 @@
         "required": true,
         "types": [
           {
+            "type": "blank_identifier",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           }
@@ -1069,6 +1191,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -1078,6 +1204,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -1185,6 +1315,10 @@
           "named": true
         },
         {
+          "type": "interface_type",
+          "named": true
+        },
+        {
           "type": "map_type",
           "named": true
         },
@@ -1194,6 +1328,10 @@
         },
         {
           "type": "simple_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
           "named": true
         },
         {
@@ -1330,6 +1468,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -1339,6 +1481,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -1374,6 +1520,10 @@
         "required": true,
         "types": [
           {
+            "type": "blank_identifier",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           }
@@ -1396,6 +1546,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -1405,6 +1559,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -1572,6 +1730,10 @@
             "named": true
           },
           {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
             "type": "struct_literal",
             "named": true
           },
@@ -1661,6 +1823,10 @@
             "named": true
           },
           {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
             "type": "struct_literal",
             "named": true
           },
@@ -1712,6 +1878,10 @@
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
             "named": true
           },
           {
@@ -1858,6 +2028,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -1867,6 +2041,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -1913,6 +2091,14 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
             "named": true
           }
         ]
@@ -2014,6 +2200,10 @@
           "named": true
         },
         {
+          "type": "interface_type",
+          "named": true
+        },
+        {
           "type": "map_type",
           "named": true
         },
@@ -2026,10 +2216,72 @@
           "named": true
         },
         {
+          "type": "struct_type",
+          "named": true
+        },
+        {
           "type": "tuple_type",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "type_assertion",
+    "named": true,
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_type",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "interface_type",
+            "named": true
+          },
+          {
+            "type": "map_type",
+            "named": true
+          },
+          {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
+            "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2155,6 +2407,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -2164,6 +2420,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -2189,6 +2449,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -2198,6 +2462,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -2239,6 +2507,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -2248,6 +2520,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -2303,6 +2579,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -2312,6 +2592,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -2391,6 +2675,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "map_type",
             "named": true
           },
@@ -2400,6 +2688,10 @@
           },
           {
             "type": "simple_type",
+            "named": true
+          },
+          {
+            "type": "struct_type",
             "named": true
           },
           {
@@ -2825,6 +3117,10 @@
   },
   {
     "type": "uintptr",
+    "named": false
+  },
+  {
+    "type": "unit",
     "named": false
   },
   {
