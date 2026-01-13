@@ -1702,6 +1702,10 @@
         {
           "type": "STRING",
           "value": "location"
+        },
+        {
+          "type": "STRING",
+          "value": "WatchEvent"
         }
       ]
     },

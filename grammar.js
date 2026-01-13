@@ -283,7 +283,7 @@ module.exports = grammar({
       'uint', 'uint8', 'uint16', 'uint32', 'uint64', 'uintptr', 'byte',
       'float32', 'float64', 'decimal',
       'string', 'bool', 'rune', 'error', 'any', 'tuple', 'unit',
-      'time', 'duration', 'timer', 'ticker', 'location'
+      'time', 'duration', 'timer', 'ticker', 'location', 'WatchEvent'
     ),
 
     array_type: $ => prec.left(choice(
