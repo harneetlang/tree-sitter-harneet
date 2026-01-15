@@ -23,8 +23,10 @@
   (struct_type)
   (interface_type)
   (enum_declaration)
-  (array_literal)
-  (map_literal)
+  (typed_slice_literal)
+  (typed_array_literal)
+  (typed_map_literal)
+  (tuple_literal)
   (struct_literal)
 ] @indent
 

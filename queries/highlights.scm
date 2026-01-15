@@ -95,12 +95,31 @@
 ;; Functions
 (function_declaration name: (identifier) @function)
 
+;; ----------------------
+;; Member Access & Qualified Types (General Fallbacks)
+;; ----------------------
+
+;; General Qualified Type: pkg.Type or pkg.Var
+(qualified_type
+  module: (identifier) @namespace
+  name: (identifier) @type)
+
+;; General member access: module.property (fallback for non-call contexts)
+(member_expression
+  object: (expression
+    (identifier) @namespace)
+  property: (identifier) @variable.other.member)
+
+;; ----------------------
+;; Function Calls (Specific Overrides)
+;; ----------------------
+
 ;; Simple function calls: foo(...)
 (call_expression
   function: (expression
-    (identifier) @function.builtin))
+    (identifier) @function))
 
-;; Method calls: module.Func(...)
+;; Method calls via Member Expression: obj.Method(...)
 (call_expression
   function: (expression
     (member_expression
@@ -108,11 +127,12 @@
         (identifier) @namespace)
       property: (identifier) @function.method)))
 
-;; General member access: module.property (fallback for non-call contexts)
-(member_expression
-  object: (expression
-    (identifier) @namespace)
-  property: (identifier) @variable.other.member)
+;; Method calls via Qualified Type (Ambiguity in grammar): fmt.Println(...)
+(call_expression
+  function: (expression
+    (qualified_type
+      module: (identifier) @namespace
+      name: (identifier) @function.method)))
 
 ;; Variables
 (variable_declaration name: (identifier) @variable)
